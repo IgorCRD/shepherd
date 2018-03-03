@@ -54,10 +54,20 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+    historyApiFallback: {
+      rewrites: [{ from: '.', to: './src/404.html' }],
+    },
+  },
   plugins: [
     new HtmlWebPackPlugin({
       template: './src/index.html',
       filename: './index.html',
+    }),
+    new HtmlWebPackPlugin({
+      template: './src/404.html',
+      filename: './404.html',
+      inject: false,
     }),
   ],
 };
