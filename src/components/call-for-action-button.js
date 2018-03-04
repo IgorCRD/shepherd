@@ -1,6 +1,8 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const CallForActionButton = styled.button`
+const CallForActionButtonStyle = styled.button`
   border-radius: 5px;
   border: 0;
   background-color: ${props => props.theme.colors.success};
@@ -10,5 +12,19 @@ const CallForActionButton = styled.button`
   color: white;
   font-family: ${props => props.theme.fonts.secondary.fontFamily};
 `;
+
+const CallForActionButton = ({ children, clickHandler }) => (
+  <CallForActionButtonStyle onClick={clickHandler}>{children}</CallForActionButtonStyle>
+);
+
+CallForActionButton.propTypes = {
+  children: PropTypes.element,
+  clickHandler: PropTypes.func,
+};
+
+CallForActionButton.defaultProps = {
+  children: null,
+  clickHandler: null,
+};
 
 export default CallForActionButton;

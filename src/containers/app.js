@@ -5,6 +5,7 @@ import WelcomePage from 'containers/welcome-page';
 const App = () => (
   <React.Fragment>
     <Route exact path="/" render={() => <WelcomePage />} />
+    <Route exact path="/authorization" render={() => <h1>{window.location.href}</h1>} />
   </React.Fragment>
 );
 

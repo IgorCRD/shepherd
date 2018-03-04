@@ -8,7 +8,7 @@ module.exports = {
       containers: path.resolve(__dirname, 'src/containers/'),
       styles: path.resolve(__dirname, 'src/styles'),
       images: path.resolve(__dirname, 'src/images/'),
-      root: path.resolve(__dirname, ''),
+      config: path.resolve(__dirname, 'src/config.js'),
     },
     extensions: ['.js', '.jsx'],
   },
