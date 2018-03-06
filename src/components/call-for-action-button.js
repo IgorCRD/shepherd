@@ -6,9 +6,7 @@ const CallForActionButtonStyle = styled.button`
   border-radius: 5px;
   border: 0;
   background-color: ${props => props.theme.colors.success};
-  padding: 0.8em;
-  margin-right: 0.5em;
-  width: 30%;
+  padding: 0.5em;
   color: white;
   font-family: ${props => props.theme.fonts.secondary.fontFamily};
 `;

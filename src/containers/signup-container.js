@@ -1,26 +1,26 @@
 import React from 'react';
-import Flex from 'styled-flex-component';
-import InputText from 'components/input-text';
-import CallForActionButton from 'components/call-for-action-button';
+import { withRouter } from 'react-router-dom';
+import SignUpButton from 'components/signup-button';
 import config from 'config';
+import routerPropTypes from 'react-router-prop-types';
 
 class SignUpContainer extends React.Component {
+  propTypes = {
+    history: routerPropTypes.history,
+    location: routerPropTypes.location,
+  };
+
   signUpClickHandler = () => {
-    if (window) {
+    if (window && this.props.history && this.props.location) {
       const { clientId, githubOauthRedirectUrl } = config;
+      this.props.history.push(this.props.location.path);
       window.location.replace(config.githubOauthUrl(clientId, githubOauthRedirectUrl));
-      // https://gitswatcherio.localtunnel.me/authorization?code=d6defcf70c79d3a49e26
     }
   };
 
   render() {
-    return (
-      <Flex>
-        <InputText placeHolder="Enter your email address" />
-        <CallForActionButton clickHandler={this.signUpClickHandler}>Sign Up</CallForActionButton>
-      </Flex>
-    );
+    return <SignUpButton signUpClickHandler={this.signUpClickHandler} />;
   }
 }
 
-export default SignUpContainer;
+export default withRouter(SignUpContainer);

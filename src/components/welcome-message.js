@@ -21,7 +21,7 @@ const WelcomeMessage = ({ SignUpContainer }) => (
 );
 
 WelcomeMessage.propTypes = {
-  SignUpContainer: PropTypes.element,
+  SignUpContainer: PropTypes.func,
 };
 
 WelcomeMessage.defaultProps = {

@@ -7,6 +7,7 @@ const Squarediv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 2em;
 
   ${media.desktop`width: 35%`};
   ${media.tablet`width: 80%`};
