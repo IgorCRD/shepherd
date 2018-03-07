@@ -5,9 +5,14 @@ import config from 'config';
 import routerPropTypes from 'react-router-prop-types';
 
 class SignUpContainer extends React.Component {
-  propTypes = {
+  static propTypes = {
     history: routerPropTypes.history,
     location: routerPropTypes.location,
+  };
+
+  static defaultProps = {
+    history: null,
+    location: null,
   };
 
   signUpClickHandler = () => {
