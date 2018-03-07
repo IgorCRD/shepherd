@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
-    "build": "webpack --mode production && http-server dist",
+    "build": "webpack --mode production",
     "run": "webpack --mode production && http-server dist"
   },
   "repository": "https://github.com/IgorCRD/the-gits-watcher.git",
