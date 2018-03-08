@@ -17,9 +17,9 @@ class SignUpContainer extends React.Component {
 
   signUpClickHandler = () => {
     if (window && this.props.history && this.props.location) {
-      const { clientId, githubOauthRedirectUrl } = config;
+      const { clientId } = config;
       this.props.history.push(this.props.location.path);
-      window.location.replace(config.githubOauthUrl(clientId, githubOauthRedirectUrl));
+      window.location.replace(config.githubOauthUrl(clientId));
     }
   };
 

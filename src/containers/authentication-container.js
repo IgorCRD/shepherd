@@ -16,9 +16,9 @@ class AuthenticationContainer extends React.Component {
 
   componentDidMount() {
     if (this.props.location.search) {
-      fetch('http://localhost:3001/api/authentication', {
+      fetch('https://shepherdaapi.localtunnel.me/api/authentication', {
         method: 'POST',
-        headers: { Accept: 'application/json' },
+        headers: { 'Content-type': 'application/json', Accept: 'application/json' },
         mode: 'cors',
         cache: 'default',
         body: JSON.stringify(queryStringParser.parse(this.props.location.search)),
@@ -31,7 +31,7 @@ class AuthenticationContainer extends React.Component {
   }
 
   render() {
-    return <pre>{JSON.stringify(this.state.user)}</pre>;
+    return <pre>{JSON.stringify(this.state.user, null, '   ')}</pre>;
   }
 }
 

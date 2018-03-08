@@ -1,10 +1,8 @@
 const config = {
-  githubOauthUrl: (clientId, redirectUri) =>
-    'https://github.com/login/oauth/authorize?' +
-    `redirect_uri=${redirectUri}&` +
-    `client_id=${clientId}`,
-  githubOauthRedirectUrl: 'https://gitswatche.localtunnel.me/authorization',
-  clientId: 'ce6230dff8a4e3621b3b',
+  githubOauthUrl: clientId =>
+    `https://github.com/login/oauth/authorize?client_id=${clientId}&scope=read:user%20user:email`,
+  githubOauthRedirectUrl: 'https://shepherda.localtunnel.me/authorization',
+  clientId: '213e2fe09d8d983e11d8',
 };
 
 export default config;
