@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import blackShepherd from 'images/shepherd-black.svg';
 import Titles from 'components/titles';
 import media from 'styles/media';
+import { Link } from 'react-router-dom';
 
 const Img = styled.img`
   width: 3.5em;
@@ -16,6 +17,7 @@ const FlexNavBarContainer = styled(Flex)`
   ${media.phone`padding: 0.5em 0.5em 0.5em 1em;`};
 
   border-bottom: 1px solid grey;
+  margin-bottom: 2em;
 `;
 
 const VerticalDash = styled.div`
@@ -31,7 +33,9 @@ const VerticalDash = styled.div`
 
 const Navbar = () => (
   <FlexNavBarContainer alignCenter>
-    <Img src={blackShepherd} alt="A shepherd dog" />
+    <Link to="/">
+      <Img src={blackShepherd} alt="A shepherd dog" />
+    </Link>
     <VerticalDash />
     <Titles>Shepherd</Titles>
   </FlexNavBarContainer>

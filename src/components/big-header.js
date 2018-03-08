@@ -17,7 +17,7 @@ const BigHeader = styled.h1`
     display: block;
     width: 1em;
     height: 2px;
-    background-color: ${props => props.theme.colors.success};
+    background-color: ${props => props.theme.colors.detail};
   }
 `;
 

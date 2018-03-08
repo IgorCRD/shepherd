@@ -15,6 +15,7 @@ const naiveTry = {
     background: '#FCFCFC',
     danger: '#FF4719',
     success: '#00A070',
+    detail: '#00A070',
   },
 };
 

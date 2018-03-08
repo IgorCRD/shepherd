@@ -4,11 +4,14 @@ const path = require('path');
 module.exports = {
   resolve: {
     alias: {
+      actions: path.resolve(__dirname, 'src/actions/'),
+      reducers: path.resolve(__dirname, 'src/reducers/'),
       components: path.resolve(__dirname, 'src/components/'),
       containers: path.resolve(__dirname, 'src/containers/'),
       styles: path.resolve(__dirname, 'src/styles'),
       images: path.resolve(__dirname, 'src/images/'),
       config: path.resolve(__dirname, 'src/config.js'),
+      api: path.resolve(__dirname, 'src/api/'),
     },
     extensions: ['.js', '.jsx'],
   },
@@ -60,6 +63,8 @@ module.exports = {
     historyApiFallback: {
       rewrites: [{ from: '.', to: './src/404.html' }],
     },
+    compress: true,
+    disableHostCheck: true,
   },
   plugins: [
     new HtmlWebPackPlugin({

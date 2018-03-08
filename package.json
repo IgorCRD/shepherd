@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch src --exec \"webpack --mode production && http-server dist -o\"",
+    "start": "nodemon --watch src --exec \"webpack --mode production && http-server dist -o -c-1\"",
     "dev": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production"
   },
@@ -43,9 +43,11 @@
     "query-string": "^5.1.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-router-prop-types": "^1.0.0",
+    "redux": "^3.7.2",
     "styled-components": "3.1.4",
     "styled-flex-component": "^2.2.1",
     "styled-normalize": "^4.0.0"
