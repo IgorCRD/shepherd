@@ -31,8 +31,8 @@ class AuthenticationContainer extends React.Component {
     const { logged, location: { search }, save } = this.props;
 
     if (!logged && search) {
-      const code = queryStringParser.parse(search);
-      ShepherdApi.loginAndFetchUser(code).then((userResponse) => {
+      const queryString = queryStringParser.parse(search);
+      ShepherdApi.authenticateAndFetchUser(queryString.code).then((userResponse) => {
         if (userResponse.login) save(userResponse);
         else this.setState(() => ({ error: false }));
       });
@@ -46,7 +46,7 @@ class AuthenticationContainer extends React.Component {
     const { logged } = this.props;
 
     if (logged) {
-      return <Redirect to="/app/main" />;
+      return <Redirect to="/app/repositories" />;
     } else if (noCode) {
       return <Redirect to="/" />;
     } else if (error) {

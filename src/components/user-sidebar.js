@@ -1,7 +1,5 @@
-/* eslint-disable no-console */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Flex from 'styled-flex-component';
 import styled from 'styled-components';
 import media from 'styles/media';
@@ -42,7 +40,7 @@ const Avatar = styled.img`
 
 const UserSidebar = ({ user }) =>
   user && (
-    <Flex>
+    <Flex column>
       <UserFlex column>
         <UserData>
           <Avatar src={user.avatar_url} />
@@ -89,10 +87,4 @@ UserSidebar.propTypes = {
   user: userShape.isRequired,
 };
 
-function mapStateToProps({ user }) {
-  return {
-    user: { ...user.user },
-  };
-}
-
-export default connect(mapStateToProps, null)(UserSidebar);
+export default UserSidebar;

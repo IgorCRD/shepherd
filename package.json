@@ -11,6 +11,9 @@
   "author": "<igor.crispimdiniz@gmail.com>",
   "license": "MIT",
   "private": true,
+  "prettier": {
+    "printWidth": 100
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
@@ -39,6 +42,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "lodash": "^4.17.5",
     "prop-types": "^15.6.1",
     "query-string": "^5.1.0",
     "react": "^16.2.0",

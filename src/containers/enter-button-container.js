@@ -5,6 +5,7 @@ import routerPropTypes from 'react-router-prop-types';
 import { connect } from 'react-redux';
 import { userShape } from 'components/user-sidebar';
 import EnterButton from 'components/enter-button';
+import { Redirect } from 'react-router';
 
 class EnterButtonContainer extends React.Component {
   static propTypes = {
@@ -19,25 +20,38 @@ class EnterButtonContainer extends React.Component {
     user: null,
   };
 
+  state = {
+    receivedClick: false,
+  };
+
   enterClickHandler = () => {
-    const { history, location } = this.props;
-    if (window && history && location) {
+    const { history, location, user } = this.props;
+    if (!user && window && history && location) {
       const { clientId } = config;
       history.push(location.path);
       window.location.replace(config.githubOauthUrl(clientId));
+      return;
     }
+
+    this.setState(() => ({
+      receivedClick: true,
+    }));
   };
 
   render() {
     const { user } = this.props;
-    return <EnterButton user={user} enterClickHandler={this.enterClickHandler} />;
+    const { receivedClick } = this.state;
+    return receivedClick ? (
+      <Redirect to="/app/repositories" />
+    ) : (
+      <EnterButton user={user} enterClickHandler={this.enterClickHandler} />
+    );
   }
 }
 
 function mapStateToProps({ user }) {
   return {
     user: user.user,
-    logged: user.user && Object.keys(user).length > 0,
   };
 }
 

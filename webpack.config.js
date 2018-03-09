@@ -12,6 +12,7 @@ module.exports = {
       images: path.resolve(__dirname, 'src/images/'),
       config: path.resolve(__dirname, 'src/config.js'),
       api: path.resolve(__dirname, 'src/api/'),
+      root: path.resolve(__dirname, 'src'),
     },
     extensions: ['.js', '.jsx'],
   },
@@ -61,7 +62,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: {
-      rewrites: [{ from: '.', to: './src/404.html' }],
+      rewrites: [{ from: '.', to: './dist/index.html' }],
     },
     compress: true,
     disableHostCheck: true,

@@ -8,7 +8,7 @@ import media from 'styles/media';
 const CustomFlex = styled(Flex)`
   justify-content: space-evenly;
 
-  ${media.desktop`margin-top: 5em`};
+  ${media.desktop`margin-top: 3.5em`};
   ${media.tablet`margin-top: 0em`};
   ${media.phone`margin-top: 0em`};
 `;

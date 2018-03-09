@@ -11,7 +11,12 @@ module.exports = {
   },
   extends: 'airbnb',
   rules: {
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.js', '.jsx'],
+      },
+    ],
     'react/no-did-mount-set-state': [false],
     'jsx-a11y/anchor-is-valid': [
       'error',
@@ -21,6 +26,7 @@ module.exports = {
         aspects: ['noHref', 'invalidHref', 'preferButton'],
       },
     ],
+    'max-len': 'off',
   },
   env: {
     browser: true,

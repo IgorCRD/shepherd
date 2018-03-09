@@ -7,8 +7,7 @@ import styled from 'styled-components';
 import gitHubLogo from 'images/github-logo-white.svg';
 
 const Img = styled.img`
-  width: 2.5em;
-  height: 2.5em;
+  width: 2.5rem;
   margin-left: 1em;
   border-radius: 50%;
 `;
@@ -22,7 +21,7 @@ const EnterButton = ({ user, enterClickHandler }) => (
     <ButtonContainer>
       <CallForActionButton clickHandler={enterClickHandler}>
         <Flex alignCenter>
-          <span>{user ? 'Sign in as' : 'Sign up with'}</span>
+          <span>{user ? `Sign in as ${user.login}` : 'Sign up with'}</span>
           <Img src={user ? user.avatar_url : gitHubLogo} alt={user ? user.login : 'GitHub'} />
         </Flex>
       </CallForActionButton>
