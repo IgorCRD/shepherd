@@ -13,7 +13,11 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-app.use(Express.static(path.join(__dirname, distDir)));
+app.use(Express.static(distDir));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(distDir, 'index.html'));
+});
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(distDir, 'index.html'));
