@@ -8,7 +8,7 @@ const port = process.env.PORT || 8080;
 const distDir = path.join(__dirname, 'dist');
 
 const corsOptions = {
-  origin: 'http://shepherd-alpha.herokuapp.com',
+  origin: 'https://shepherd-alpha.herokuapp.com',
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
