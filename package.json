@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch src --exec \"webpack --mode production && http-server dist -o -c-1\"",
+    "start": "node server.js",
     "dev": "webpack-dev-server --mode development --open",
+    "postinstall": "webpack --mode production",
     "build": "webpack --mode production"
   },
   "repository": "https://github.com/IgorCRD/the-gits-watcher.git",
@@ -42,6 +43,8 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
     "lodash": "^4.17.5",
     "prop-types": "^15.6.1",
     "query-string": "^5.1.0",
