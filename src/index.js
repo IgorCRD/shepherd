@@ -10,7 +10,7 @@ import App from 'containers/app';
 import BaseStyles from 'styles/base-styles';
 import theme from 'styles/themes/naive-try';
 import reducer from 'reducers';
-import { loadState, saveState } from 'root/localStorage';
+import { loadState, saveState } from 'src/localStorage';
 
 const root = document.getElementById('app');
 BaseStyles(); // inject base styles

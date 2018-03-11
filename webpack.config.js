@@ -4,15 +4,16 @@ const path = require('path');
 module.exports = {
   resolve: {
     alias: {
+      root: path.resolve(__dirname, './'),
+      src: path.resolve(__dirname, 'src/'),
       actions: path.resolve(__dirname, 'src/actions/'),
       reducers: path.resolve(__dirname, 'src/reducers/'),
       components: path.resolve(__dirname, 'src/components/'),
       containers: path.resolve(__dirname, 'src/containers/'),
-      styles: path.resolve(__dirname, 'src/styles'),
+      styles: path.resolve(__dirname, 'src/styles/'),
       images: path.resolve(__dirname, 'src/images/'),
       config: path.resolve(__dirname, 'src/config.js'),
       api: path.resolve(__dirname, 'src/api/'),
-      root: path.resolve(__dirname, 'src'),
     },
     extensions: ['.js', '.jsx'],
   },

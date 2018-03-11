@@ -1,5 +1,5 @@
 class ShepherdAPI {
-  url = 'https://shepherd-alpha.herokuapp.com/api';
+  url = 'http://localhost:3001/api';
 
   authenticateAndFetchUser = (code) => {
     const getUserURL = `${this.url}/user/authenticate`;

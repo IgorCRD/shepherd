@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "paths": {
+      "root/*": ["./*"],
+      "src/*": ["src/*"],
+      "actions/*": ["src/actions/*"],
+      "reducers/*": ["src/reducers/*"],
+      "components/*": ["src/components/*"],
+      "containers/*": ["src/containers/*"],
+      "styles/*": ["src/styles/*"],
+      "images/*": ["src/images/*"],
+      "api/*": ["src/api/*"],
+      "config": ["src/config.js"]
+    }
+  },
+  "exclude": ["dist", "node_modules"]
+}
