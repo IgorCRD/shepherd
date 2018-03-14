@@ -13,7 +13,7 @@ const CommitList = ({ commits }) => (
   <UlWrapper>
     {commits.map(({ commit, repoFullName, html_url: htmlUrl }, index) => (
       <Commit
-        author={commit.author.login}
+        author={commit.author.login || commit.author.name}
         message={commit.message}
         link={htmlUrl}
         date={commit.committer.date}
@@ -38,6 +38,7 @@ CommitList.propTypes = {
         name: PropTypes.string,
         email: PropTypes.string,
         date: PropTypes.string,
+        login: PropTypes.string,
       },
       committer: {
         name: PropTypes.string,

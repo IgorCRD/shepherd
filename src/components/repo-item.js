@@ -12,25 +12,45 @@ const Item = styled.div`
   font-size: 14px;
   letter-spacing: 0.5px;
 
+  cursor: pointer;
+
   ${props =>
-    props.selected === props.name &&
+    props.selected === props.fullName &&
     ` color: white;
       background-color: rgb(30, 56, 73);
       content: '';
     `};
 `;
 
-const RepoItem = ({ name, selected }) => (
-  <li>
-    <Item name={name} selected={selected}>
-      {name}
-    </Item>
-  </li>
-);
+class RepoItem extends React.Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    fullName: PropTypes.string.isRequired,
+    selected: PropTypes.string.isRequired,
+    selectHander: PropTypes.func.isRequired,
+  };
 
-RepoItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  selected: PropTypes.string.isRequired,
-};
+  onClickSelectHandler = () => {
+    const { selectHander, fullName } = this.props;
+    selectHander(fullName);
+  };
+
+  render() {
+    const { fullName, name, selected } = this.props;
+
+    return (
+      <li>
+        <Item
+          name={name}
+          fullName={fullName}
+          selected={selected}
+          onClick={this.onClickSelectHandler}
+        >
+          {name}
+        </Item>
+      </li>
+    );
+  }
+}
 
 export default RepoItem;

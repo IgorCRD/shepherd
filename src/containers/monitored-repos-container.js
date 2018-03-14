@@ -2,36 +2,37 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ShepherdApi from 'api/shepherd-api';
-import RepoList from 'components/repo-list';
+import RepoList, { repoShape } from 'components/repo-list';
+import { filter, saveRepos } from 'actions/repo-actions';
 
 class MonitoredReposContainer extends React.Component {
   static propTypes = {
     userId: PropTypes.number.isRequired,
-  };
-
-  state = {
-    repos: null,
+    selected: PropTypes.string.isRequired,
+    repos: repoShape.isRequired,
+    saveRepoList: PropTypes.func.isRequired,
+    selectHander: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    const { userId } = this.props;
+    const { userId, saveRepoList } = this.props;
     ShepherdApi.getMonitoredRepos(userId).then(({ monitored_repos: monitoredRepos }) => {
-      this.setState(() => ({
-        repos: monitoredRepos,
-      }));
+      saveRepoList(monitoredRepos);
     });
   }
 
   render() {
-    const { repos } = this.state;
-    return repos && <RepoList repos={repos} />;
+    const { selected, repos, selectHander } = this.props;
+    return repos && <RepoList repos={repos} selected={selected} selectHander={selectHander} />;
   }
 }
 
-function mapStateToProps({ user }) {
+function mapStateToProps({ user, repo }) {
   return {
+    selected: repo.filterBy,
     userId: user.id,
+    repos: repo.monitored,
   };
 }
 
-export default connect(mapStateToProps, null)(MonitoredReposContainer);
+export default connect(mapStateToProps, { selectHander: filter, saveRepoList: saveRepos })(MonitoredReposContainer);

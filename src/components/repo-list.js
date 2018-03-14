@@ -16,36 +16,49 @@ const UlWrap = styled.ul`
   padding: 0;
 `;
 
-const RepoList = ({ repos }) => {
-  const repoNames = repos.map(repoItem => repoItem.name);
-  repoNames.unshift('All');
+const RepoList = ({ repos, selected, selectHander }) => {
+  const repoList = [...repos];
+  repoList.unshift({ full_name: 'All', name: 'All' });
   return (
     <div>
       <RepoListTitle>REPOS</RepoListTitle>
-      <UlWrap>{repoNames.map(repoName => <RepoItem selected="All" name={repoName} />)}</UlWrap>
-      <pre>{JSON.stringify(repoNames, null, '  ')}</pre>
+      <UlWrap>
+        {repoList.map(repo => (
+          <RepoItem
+            selected={selected}
+            name={repo.name}
+            fullName={repo.full_name}
+            selectHander={selectHander}
+          />
+        ))}
+      </UlWrap>
+      <pre>{JSON.stringify(repoList, null, '  ')}</pre>
     </div>
   );
 };
 
+export const repoShape = PropTypes.shape({
+  _id: PropTypes.string,
+  id: PropTypes.number,
+  name: PropTypes.string,
+  full_name: PropTypes.string,
+  private: PropTypes.bool,
+  html_url: PropTypes.string,
+  description: PropTypes.string,
+  created_at: PropTypes.string,
+  updated_at: PropTypes.string,
+  pushed_at: PropTypes.string,
+  homepage: PropTypes.string,
+  language: PropTypes.string,
+  ownerId: PropTypes.number,
+  ownerName: PropTypes.string,
+  __v: PropTypes.number,
+});
+
 RepoList.propTypes = {
-  repos: PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.string,
-    id: PropTypes.number,
-    name: PropTypes.string,
-    full_name: PropTypes.string,
-    private: PropTypes.bool,
-    html_url: PropTypes.string,
-    description: PropTypes.string,
-    created_at: PropTypes.string,
-    updated_at: PropTypes.string,
-    pushed_at: PropTypes.string,
-    homepage: PropTypes.string,
-    language: PropTypes.string,
-    ownerId: PropTypes.number,
-    ownerName: PropTypes.string,
-    __v: PropTypes.number,
-  })).isRequired,
+  selected: PropTypes.string.isRequired,
+  selectHander: PropTypes.func.isRequired,
+  repos: PropTypes.arrayOf(repoShape).isRequired,
 };
 
 export default RepoList;
