@@ -11,6 +11,7 @@ module.exports = {
   },
   extends: 'airbnb',
   rules: {
+    'jsx-a11y/click-events-have-key-events': 'off',
     'react/jsx-filename-extension': [
       1,
       {

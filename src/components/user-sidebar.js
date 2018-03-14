@@ -31,11 +31,10 @@ const UserLogin = styled.div`
   align-self: center;
 `;
 
-const Avatar = styled.img`
+const AvatarImg = styled.img`
   border-radius: 50%;
   border: ${props => props.theme.colors.detail} solid 0.2em;
-  width: 15vw;
-  height: 15vw;
+  width: 10vw;
 `;
 
 const UserSidebar = ({ user }) =>
@@ -43,7 +42,7 @@ const UserSidebar = ({ user }) =>
     <Flex column>
       <UserFlex column>
         <UserData>
-          <Avatar src={user.avatar_url} />
+          <AvatarImg src={user.avatar_url} />
           <UserName>
             <span>{user.name}</span>
           </UserName>
