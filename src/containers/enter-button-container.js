@@ -51,7 +51,7 @@ class EnterButtonContainer extends React.Component {
 
 function mapStateToProps({ user }) {
   return {
-    user: user.user,
+    user,
   };
 }
 

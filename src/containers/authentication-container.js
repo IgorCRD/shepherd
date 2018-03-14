@@ -58,7 +58,7 @@ class AuthenticationContainer extends React.Component {
 
 function mapStateToProps({ user }) {
   return {
-    logged: user.user && Object.keys(user.user).length > 0,
+    logged: !!user,
   };
 }
 

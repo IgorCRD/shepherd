@@ -1,9 +1,13 @@
-import { SAVE_USER } from 'actions/user-actions';
+import { SAVE_USER, LOGOUT_USER } from 'actions/user-actions';
 
-export default function user(state = {}, action) {
+const initialState = null;
+
+export default function user(state = initialState, action) {
   switch (action.type) {
     case SAVE_USER:
-      return { ...state, user: action.user };
+      return { ...state, ...action.user };
+    case LOGOUT_USER:
+      return initialState;
     default:
       return state;
   }

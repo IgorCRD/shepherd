@@ -4,13 +4,6 @@ import Flex from 'styled-flex-component';
 import styled from 'styled-components';
 import media from 'styles/media';
 
-const UserFlex = styled(Flex)`
-  align-items: center;
-  ${media.desktop`width: 25vw;`};
-  ${media.tablet`width: 20vw;`};
-  ${media.phone`width: 17vw;`};
-`;
-
 const UserData = styled.div`
   margin-left: 2em;
 `;
@@ -37,14 +30,23 @@ const AvatarImg = styled.img`
   width: 10vw;
 `;
 
-const UserSidebar = ({ user }) =>
-  user && (
-    <Flex column>
-      <UserFlex column>
+const UserSidebar = ({ user }) => {
+  const names = user.name.split(' ');
+  let firstAndLastNames;
+  if (names.length !== 0) {
+    [firstAndLastNames] = names;
+  }
+  if (names.length >= 2) {
+    firstAndLastNames = `${names[0]} ${names[names.length - 1]}`;
+  }
+
+  return (
+    user && (
+      <Flex column>
         <UserData>
           <AvatarImg src={user.avatar_url} />
           <UserName>
-            <span>{user.name}</span>
+            <span>{firstAndLastNames}</span>
           </UserName>
           <UserLogin>
             <span>{user.login}</span>
@@ -56,10 +58,11 @@ const UserSidebar = ({ user }) =>
             <span>{user.location}</span>
           </div>
         </UserData>
-      </UserFlex>
-      <pre>{JSON.stringify(user, null, '   ')}</pre>
-    </Flex>
+        <pre>{JSON.stringify(user, null, '   ')}</pre>
+      </Flex>
+    )
   );
+};
 
 export const userShape = PropTypes.shape({
   login: PropTypes.string.required,

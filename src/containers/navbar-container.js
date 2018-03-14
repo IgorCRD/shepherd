@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Flex from 'styled-flex-component';
 import { userShape } from 'components/user-sidebar';
 import ShepherdAPI from 'api/shepherd-api';
-import { saveUser } from 'actions/user-actions';
+import { saveUser, logout } from 'actions/user-actions';
 import Navbar from 'components/navbar';
 import DropdownContainer from 'containers/dropdown-container';
 import DropdownIcon from 'components/dropdown-icon';
@@ -28,32 +27,34 @@ class NavbarContainer extends React.Component {
   static propTypes = {
     user: userShape,
     save: PropTypes.func,
+    logout: PropTypes.func,
   };
 
   static defaultProps = {
     user: null,
     save: null,
+    logout: null,
   };
 
   componentDidMount() {
-    const { user: { id }, save } = this.props;
-    if (id && save) {
-      ShepherdAPI.fetchUser(id).then(user => save(user));
+    const { user, save } = this.props;
+    if (user && user.id && save) {
+      ShepherdAPI.fetchUser(user.id).then(updatedUser => save(updatedUser));
     }
   }
 
   signOutClickHandler = () => {
-    // eslint-disable-next-line no-console
-    console.log('Sign out');
+    const { logout: logoutUser } = this.props;
+    logoutUser();
   };
 
   render() {
     const { user } = this.props;
-    return user ? (
+    return (
       <Navbar
         user={user}
         Avatar={() =>
-          (Object.keys(user).length ? (
+          user && (
             <DropdownContainer
               Ancor={() => (
                 <Flex full justifyEnd alignCenter>
@@ -69,19 +70,17 @@ class NavbarContainer extends React.Component {
                 Sign out
               </Link>
             </DropdownContainer>
-          ) : null)
+          )
         }
       />
-    ) : (
-      <Redirect to="/" />
     );
   }
 }
 
 function mapStateToProps({ user }) {
   return {
-    user: { ...user.user },
+    user,
   };
 }
 
-export default connect(mapStateToProps, { save: saveUser })(NavbarContainer);
+export default connect(mapStateToProps, { save: saveUser, logout })(NavbarContainer);
