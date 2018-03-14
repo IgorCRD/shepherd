@@ -45,12 +45,14 @@ class DropdownContainer extends React.Component {
         tabIndex="-1"
         role="button"
         onClick={this.ancorOnClickHandler}
-        style={{ outline: 'none', position: 'relative', cursor: 'pointer' }}
+        style={{ outline: 'none', position: 'relative' }}
         ref={(divref) => {
           this.eventsDiv = divref;
         }}
       >
-        <Ancor />
+        <div style={{ cursor: 'pointer' }}>
+          <Ancor />
+        </div>
         <Dropdown visibility={visibility}>{children}</Dropdown>
       </div>
     );

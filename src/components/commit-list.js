@@ -3,18 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Commit from 'components/commit';
 
-function firstAndLastName(fullname) {
-  const names = fullname.split(' ');
-  let firstAndLastNames;
-  if (names.length !== 0) {
-    [firstAndLastNames] = names;
-  }
-  if (names.length >= 2) {
-    firstAndLastNames = `${names[0]} ${names[names.length - 1]}`;
-  }
-  return firstAndLastNames;
-}
-
 const UlWrapper = styled.ul`
   border-radius: 3px;
   flex-grow: 0.35;
@@ -25,7 +13,7 @@ const CommitList = ({ commits }) => (
   <UlWrapper>
     {commits.map(({ commit, repoFullName, html_url: htmlUrl }, index) => (
       <Commit
-        author={firstAndLastName(commit.author.name)}
+        author={commit.author.login}
         message={commit.message}
         link={htmlUrl}
         date={commit.committer.date}

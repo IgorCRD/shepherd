@@ -34,6 +34,17 @@ class ShepherdAPI {
       cache: 'default',
     }).then(resp => resp.json());
   };
+
+  getMonitoredRepos = (id) => {
+    const getAllCommitsUrl = `${this.url}/user/${id}/monitored`;
+
+    return fetch(getAllCommitsUrl, {
+      method: 'GET',
+      headers: { 'Content-type': 'application/json', Accept: 'application/json' },
+      mode: 'cors',
+      cache: 'default',
+    }).then(resp => resp.json());
+  };
 }
 
 export default new ShepherdAPI();

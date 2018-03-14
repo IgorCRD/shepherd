@@ -18,7 +18,7 @@ const CardDiv = styled.div`
 const Title = styled.h1`
   color: ${props => props.theme.fonts.primary.color};
   font-family: ${props => props.theme.fonts.secondary.fontFamily};
-  font-size: 22px;
+  font-size: 17px;
   letter-spacing: 0.5px;
   margin-top: 0.2em;
   margin-bottom: 5px;
@@ -59,7 +59,14 @@ const Commit = ({
           <Flex full justifyEnd>
             <BottomSpan>
               commited by
-              <MarkedSpan>{` ${author} `}</MarkedSpan>
+              <a
+                href={`https://github.com/${author}`}
+                style={{
+                  'text-decoration': 'none',
+                }}
+              >
+                <MarkedSpan>{` ${author} `}</MarkedSpan>
+              </a>
               at {new Date(date).toLocaleString()}
             </BottomSpan>
           </Flex>
