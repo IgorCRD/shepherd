@@ -2,6 +2,11 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: 'bundle.[hash].js',
+    publicPath: '/',
+  },
   resolve: {
     alias: {
       root: path.resolve(__dirname, './'),
