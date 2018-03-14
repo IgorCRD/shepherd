@@ -58,7 +58,6 @@ const UserSidebar = ({ user }) => {
             <span>{user.location}</span>
           </div>
         </UserData>
-        <pre>{JSON.stringify(user, null, '   ')}</pre>
       </Flex>
     )
   );

@@ -46,7 +46,7 @@ class AuthenticationContainer extends React.Component {
     const { logged } = this.props;
 
     if (logged) {
-      return <Redirect to="/app/repositories" />;
+      return <Redirect to="/app/main" />;
     } else if (noCode) {
       return <Redirect to="/" />;
     } else if (error) {
