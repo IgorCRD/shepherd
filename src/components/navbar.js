@@ -17,6 +17,7 @@ const FlexNavBarContainer = styled(Flex)`
   ${media.tablet`padding: 0.5em 1em 0.5em 2em;`};
   ${media.phone`padding: 0.5em 0.5em 0.5em 1em;`};
 
+  background-color: white;
   border-bottom: 1px solid grey;
   margin-bottom: 2em;
 `;

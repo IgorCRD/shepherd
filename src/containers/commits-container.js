@@ -2,19 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ShepherdApi from 'api/shepherd-api';
-import Commit from 'components/commit';
-
-function firstAndLastName(fullname) {
-  const names = fullname.split(' ');
-  let firstAndLastNames;
-  if (names.length !== 0) {
-    [firstAndLastNames] = names;
-  }
-  if (names.length >= 2) {
-    firstAndLastNames = `${names[0]} ${names[names.length - 1]}`;
-  }
-  return firstAndLastNames;
-}
+import CommitList from 'components/commit-list';
 
 class CommitsContainer extends React.Component {
   static propTypes = {
@@ -27,31 +15,22 @@ class CommitsContainer extends React.Component {
 
   componentDidMount() {
     const { userId } = this.props;
-    ShepherdApi.getAllCommits(userId).then(commits =>
+    ShepherdApi.getAllCommits(userId).then((commits) => {
+      const orderedCommits = [...commits];
+      orderedCommits.sort((a, b) => {
+        if (new Date(a.commit.committer.date) < new Date(b.commit.committer.date)) return 1;
+        if (new Date(a.commit.committer.date) > new Date(b.commit.committer.date)) return -1;
+        return 0;
+      });
       this.setState(() => ({
-        commits,
-      })));
+        commits: orderedCommits,
+      }));
+    });
   }
 
   render() {
     const { commits } = this.state;
-    // eslint-disable-next-line no-console
-    console.log(JSON.stringify(commits, null, '   '));
-    return commits && commits.length > 0 ? (
-      <ul>
-        {commits.map(({ commit }) => (
-          <Commit
-            author={firstAndLastName(commit.author.name)}
-            message={commit.message}
-            link={commit.html_url}
-            date={commit.committer.date}
-            key={commit.sha}
-          />
-        ))}
-      </ul>
-    ) : (
-      ''
-    );
+    return commits && commits.length > 0 ? <CommitList commits={commits} /> : '';
   }
 }
 

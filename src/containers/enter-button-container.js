@@ -42,7 +42,7 @@ class EnterButtonContainer extends React.Component {
     const { user } = this.props;
     const { receivedClick } = this.state;
     return receivedClick ? (
-      <Redirect to="/app/repositories" />
+      <Redirect to="/app/main" />
     ) : (
       <EnterButton user={user} enterClickHandler={this.enterClickHandler} />
     );

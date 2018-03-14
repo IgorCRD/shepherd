@@ -4,10 +4,6 @@ import Flex from 'styled-flex-component';
 import styled from 'styled-components';
 import media from 'styles/media';
 
-const UserData = styled.div`
-  margin-left: 2em;
-`;
-
 const UserName = styled.div`
   color: ${props => props.theme.fonts.primary.color};
   font-family: ${props => props.theme.fonts.secondary.fontFamily};
@@ -43,7 +39,7 @@ const UserSidebar = ({ user }) => {
   return (
     user && (
       <Flex column>
-        <UserData>
+        <div>
           <AvatarImg src={user.avatar_url} />
           <UserName>
             <span>{firstAndLastNames}</span>
@@ -57,7 +53,7 @@ const UserSidebar = ({ user }) => {
           <div>
             <span>{user.location}</span>
           </div>
-        </UserData>
+        </div>
       </Flex>
     )
   );

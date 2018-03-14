@@ -6,13 +6,19 @@ import NavbarContainer from 'containers/navbar-container';
 import CommitsContainer from 'containers/commits-container';
 import SidebarContainer from 'containers/sidebar-container';
 import Flex from 'styled-flex-component';
+import styled from 'styled-components';
 
 const possibleRoutes = ['/app', '/app/main', '/authentication'];
 
+const FullFlex = styled(Flex)`
+  min-height: 100vh;
+  background-color: #f1f3f5;
+`;
+
 const App = () => (
-  <Flex column full>
+  <FullFlex column full>
     <Route path="/" render={() => <NavbarContainer />} />
-    <Flex>
+    <Flex justifyCenter>
       <Route path="/app" render={() => <SidebarContainer />} />
       <Route path="/app/main" render={() => <CommitsContainer />} />
     </Flex>
@@ -33,7 +39,7 @@ const App = () => (
         return '';
       }}
     />
-  </Flex>
+  </FullFlex>
 );
 
 export default App;
