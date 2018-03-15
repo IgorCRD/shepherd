@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ShepherdApi from 'api/shepherd-api';
 import RepoList, { repoShape } from 'components/repo-list';
-import { filter, saveRepos } from 'actions/repo-actions';
+import { filter, saveRepos, remove } from 'actions/repo-actions';
 
 class MonitoredReposContainer extends React.Component {
   static propTypes = {
@@ -12,6 +12,7 @@ class MonitoredReposContainer extends React.Component {
     repos: repoShape.isRequired,
     saveRepoList: PropTypes.func.isRequired,
     selectHander: PropTypes.func.isRequired,
+    removeRepo: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -21,18 +22,39 @@ class MonitoredReposContainer extends React.Component {
     });
   }
 
+  removeRepoHandler = (repoFullName) => {
+    const { removeRepo, repos, userId } = this.props;
+    const repoToBeRemoved = repos.filter(repo => repo.full_name === repoFullName)[0];
+    ShepherdApi.removeRepo(userId, repoToBeRemoved.id).then(() => {
+      removeRepo(repoFullName);
+    });
+  };
+
   render() {
     const { selected, repos, selectHander } = this.props;
-    return repos && <RepoList repos={repos} selected={selected} selectHander={selectHander} />;
+    return (
+      repos && (
+        <RepoList
+          repos={repos}
+          selected={selected}
+          selectHander={selectHander}
+          removeRepo={this.removeRepoHandler}
+        />
+      )
+    );
   }
 }
 
 function mapStateToProps({ user, repo }) {
   return {
-    selected: repo.filterBy,
+    selected: repo.filter,
     userId: user.id,
     repos: repo.monitored,
   };
 }
 
-export default connect(mapStateToProps, { selectHander: filter, saveRepoList: saveRepos })(MonitoredReposContainer);
+export default connect(mapStateToProps, {
+  selectHander: filter,
+  saveRepoList: saveRepos,
+  removeRepo: remove,
+})(MonitoredReposContainer);

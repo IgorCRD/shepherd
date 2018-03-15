@@ -9,10 +9,11 @@ const UlWrapper = styled.ul`
   max-width: 50%;
 `;
 
-const CommitList = ({ commits }) => (
+const CommitList = ({ commits, selectRepo }) => (
   <UlWrapper>
     {commits.map(({ commit, repoFullName, html_url: htmlUrl }, index) => (
       <Commit
+        selectRepo={selectRepo}
         author={commit.author.login || commit.author.name}
         message={commit.message}
         link={htmlUrl}
@@ -26,28 +27,31 @@ const CommitList = ({ commits }) => (
   </UlWrapper>
 );
 
-CommitList.propTypes = {
-  commits: PropTypes.arrayOf(PropTypes.shape({
-    sha: PropTypes.string,
-    repoId: PropTypes.string,
-    repoFullName: PropTypes.string,
-    html_url: PropTypes.string,
-    commit: {
-      url: PropTypes.string,
-      author: {
-        name: PropTypes.string,
-        email: PropTypes.string,
-        date: PropTypes.string,
-        login: PropTypes.string,
-      },
-      committer: {
-        name: PropTypes.string,
-        email: PropTypes.string,
-        date: PropTypes.string,
-      },
-      message: PropTypes.string,
+export const commitShape = PropTypes.shape({
+  sha: PropTypes.string,
+  repoId: PropTypes.string,
+  repoFullName: PropTypes.string,
+  html_url: PropTypes.string,
+  commit: {
+    url: PropTypes.string,
+    author: {
+      name: PropTypes.string,
+      email: PropTypes.string,
+      date: PropTypes.string,
+      login: PropTypes.string,
     },
-  })).isRequired,
+    committer: {
+      name: PropTypes.string,
+      email: PropTypes.string,
+      date: PropTypes.string,
+    },
+    message: PropTypes.string,
+  },
+});
+
+CommitList.propTypes = {
+  commits: PropTypes.arrayOf(commitShape).isRequired,
+  selectRepo: PropTypes.func.isRequired,
 };
 
 export default CommitList;

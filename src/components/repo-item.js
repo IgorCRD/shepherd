@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Flex from 'styled-flex-component';
+import TrashBin from 'images/trash-bin.svg';
 
-const Item = styled.div`
+const Item = styled(Flex)`
   border-radius: 4px;
 
   padding: 12px;
@@ -22,17 +24,34 @@ const Item = styled.div`
     `};
 `;
 
+const RemoveButton = styled(Flex)`
+  background-color: red;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  color: white;
+`;
+
 class RepoItem extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     fullName: PropTypes.string.isRequired,
     selected: PropTypes.string.isRequired,
     selectHander: PropTypes.func.isRequired,
+    removeRepo: PropTypes.func.isRequired,
   };
 
   onClickSelectHandler = () => {
     const { selectHander, fullName } = this.props;
     selectHander(fullName);
+  };
+
+  onClickRemove = (event) => {
+    event.stopPropagation();
+    const { removeRepo, fullName, selectHander } = this.props;
+
+    removeRepo(fullName);
+    selectHander('All');
   };
 
   render() {
@@ -47,6 +66,13 @@ class RepoItem extends React.Component {
           onClick={this.onClickSelectHandler}
         >
           {name}
+          {name !== 'All' && (
+            <Flex full justifyEnd onClick={this.onClickRemove}>
+              <RemoveButton justifyCenter alignCenter>
+                <img src={TrashBin} alt="Trash bin" style={{ width: '11px' }} />
+              </RemoveButton>
+            </Flex>
+          )}
         </Item>
       </li>
     );

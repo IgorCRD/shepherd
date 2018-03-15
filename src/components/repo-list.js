@@ -16,7 +16,9 @@ const UlWrap = styled.ul`
   padding: 0;
 `;
 
-const RepoList = ({ repos, selected, selectHander }) => {
+const RepoList = ({
+  repos, selected, selectHander, removeRepo,
+}) => {
   const repoList = [...repos];
   repoList.unshift({ full_name: 'All', name: 'All' });
   return (
@@ -29,10 +31,10 @@ const RepoList = ({ repos, selected, selectHander }) => {
             name={repo.name}
             fullName={repo.full_name}
             selectHander={selectHander}
+            removeRepo={removeRepo}
           />
         ))}
       </UlWrap>
-      <pre>{JSON.stringify(repoList, null, '  ')}</pre>
     </div>
   );
 };
@@ -58,6 +60,7 @@ export const repoShape = PropTypes.shape({
 RepoList.propTypes = {
   selected: PropTypes.string.isRequired,
   selectHander: PropTypes.func.isRequired,
+  removeRepo: PropTypes.func.isRequired,
   repos: PropTypes.arrayOf(repoShape).isRequired,
 };
 

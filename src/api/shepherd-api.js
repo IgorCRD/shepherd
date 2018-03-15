@@ -45,6 +45,17 @@ class ShepherdAPI {
       cache: 'default',
     }).then(resp => resp.json());
   };
+
+  removeRepo = (userId, repoId) => {
+    const removeRepoUrl = `${this.url}/repos/${repoId}?userId=${userId}`;
+
+    return fetch(removeRepoUrl, {
+      method: 'DELETE',
+      headers: { 'Content-type': 'application/json', Accept: 'application/json' },
+      mode: 'cors',
+      cache: 'default',
+    }).then(resp => resp.json());
+  };
 }
 
 export default new ShepherdAPI();

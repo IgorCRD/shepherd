@@ -43,7 +43,7 @@ const DescriptionParagraph = styled.p`
 `;
 
 const Commit = ({
-  author, message, date, key, repoFullName, index, length,
+  selectRepo, author, message, date, key, repoFullName, index, length,
 }) => {
   const messageParts = message.split('\n');
   const [title, ...description] = messageParts;
@@ -55,7 +55,11 @@ const Commit = ({
         <Title>{title}</Title>
         <DescriptionParagraph>{fullDescription}</DescriptionParagraph>
         <Flex full>
-          <MarkedSpan alignSelfStart>{repoFullName}</MarkedSpan>
+          <div style={{ cursor: 'pointer' }}>
+            <MarkedSpan alignSelfStart onClick={() => selectRepo(repoFullName)}>
+              {repoFullName}
+            </MarkedSpan>
+          </div>
           <Flex full justifyEnd>
             <BottomSpan>
               commited by
@@ -85,6 +89,7 @@ Commit.propTypes = {
   key: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   length: PropTypes.number.isRequired,
+  selectRepo: PropTypes.func.isRequired,
 };
 
 Commit.defaultProps = {

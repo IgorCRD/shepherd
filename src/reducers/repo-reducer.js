@@ -1,19 +1,20 @@
-import { FILTER, SAVE_LIST, REMOVE_REPO } from 'actions/repo-actions';
+import { FILTER, SAVE_LIST, REMOVE_REPO, SAVE_COMMITS } from 'actions/repo-actions';
 import { LOGOUT_USER } from 'actions/user-actions';
 
 const initialState = {
   monitored: null,
-  filterBy: 'All',
+  filter: 'All',
+  commits: null,
 };
 
-function unique(repos) {
+function unique(items, key) {
   const u = {};
   const a = [];
-  for (let i = 0, l = repos.length; i < l; i += 1) {
+  for (let i = 0, l = items.length; i < l; i += 1) {
     // eslint-disable-next-line no-prototype-builtins
-    if (!u.hasOwnProperty(repos[i].full_name)) {
-      a.push(repos[i]);
-      u[repos[i].full_name] = 1;
+    if (!u.hasOwnProperty(items[i][key])) {
+      a.push(items[i]);
+      u[items[i][key]] = 1;
     }
   }
   return a;
@@ -22,13 +23,22 @@ function unique(repos) {
 export default function user(state = initialState, action) {
   switch (action.type) {
     case FILTER:
-      return { ...state, filterBy: action.repo };
+      return { ...state, filter: action.repo };
     case SAVE_LIST:
-      return { ...state, monitored: unique([...(state.monitored || []), ...action.repos]) };
+      return {
+        ...state,
+        monitored: unique([...(state.monitored || []), ...action.repos], 'full_name'),
+      };
     case REMOVE_REPO:
       return {
         ...state,
-        monitored: [...(state.monitored || [])].filter(repo => repo !== action.repo),
+        monitored: [...(state.monitored || []).filter(repo => repo.full_name !== action.repo)],
+        commits: [...(state.commits || []).filter(commit => commit.repoFullName !== action.repo)],
+      };
+    case SAVE_COMMITS:
+      return {
+        ...state,
+        commits: unique([...(state.commits || []), ...action.commits], 'sha'),
       };
     case LOGOUT_USER:
       return initialState;
