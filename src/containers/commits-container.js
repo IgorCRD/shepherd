@@ -4,6 +4,17 @@ import { connect } from 'react-redux';
 import ShepherdApi from 'api/shepherd-api';
 import CommitList, { commitShape } from 'components/commit-list';
 import { saveCommits, filter } from 'actions/repo-actions';
+import styled from 'styled-components';
+import Flex from 'styled-flex-component';
+
+const NothingToShow = styled(Flex)`
+  background: white;
+  margin-left: 40px;
+  border: grey solid 1px;
+  margin-top: 13px;
+  padding: 15px;
+  border-radius: 3px;
+`;
 
 class CommitsContainer extends React.Component {
   static propTypes = {
@@ -17,12 +28,6 @@ class CommitsContainer extends React.Component {
   componentDidMount() {
     const { userId, saveCommitList } = this.props;
     ShepherdApi.getAllCommits(userId).then((commits) => {
-      const orderedCommits = [...commits];
-      orderedCommits.sort((a, b) => {
-        if (new Date(a.commit.committer.date) < new Date(b.commit.committer.date)) return 1;
-        if (new Date(a.commit.committer.date) > new Date(b.commit.committer.date)) return -1;
-        return 0;
-      });
       saveCommitList(commits);
     });
   }
@@ -32,10 +37,20 @@ class CommitsContainer extends React.Component {
     const filteredCommits =
       commits &&
       commits.filter(commit => filterRepo === 'All' || commit.repoFullName === filterRepo);
-    return filteredCommits && filteredCommits.length > 0 ? (
-      <CommitList commits={filteredCommits} selectRepo={selectRepo} />
+
+    const orderedCommits = [...(filteredCommits || [])];
+    orderedCommits.sort((a, b) => {
+      if (new Date(a.commit.committer.date) < new Date(b.commit.committer.date)) return 1;
+      if (new Date(a.commit.committer.date) > new Date(b.commit.committer.date)) return -1;
+      return 0;
+    });
+
+    return orderedCommits && orderedCommits.length > 0 ? (
+      <CommitList commits={orderedCommits} selectRepo={selectRepo} />
     ) : (
-      ''
+      <NothingToShow>
+        Sorry! Nothing to see here! You can start adding repos using the field above.
+      </NothingToShow>
     );
   }
 }

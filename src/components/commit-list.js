@@ -6,7 +6,7 @@ import Commit from 'components/commit';
 const UlWrapper = styled.ul`
   border-radius: 3px;
   flex-grow: 0.35;
-  max-width: 50%;
+  max-width: 100%;
 `;
 
 const CommitList = ({ commits, selectRepo }) => (

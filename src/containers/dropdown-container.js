@@ -7,6 +7,13 @@ class DropdownContainer extends React.Component {
     children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element])
       .isRequired,
     Ancor: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
+    onChange: PropTypes.func,
+  };
+
+  static defaultProps = {
+    onClick: null,
+    onChange: null,
   };
 
   state = {
@@ -36,15 +43,24 @@ class DropdownContainer extends React.Component {
     }));
   };
 
+  show = (shouldShow) => {
+    this.setState(() => ({
+      visibility: shouldShow ? 'show' : 'hidden',
+    }));
+  };
+
   render() {
-    const { children, Ancor } = this.props;
+    const {
+      children, Ancor, onClick, onChange,
+    } = this.props;
     const { visibility } = this.state;
 
     return (
       <div
         tabIndex="-1"
         role="button"
-        onClick={this.ancorOnClickHandler}
+        onClick={onClick ? event => onClick(event, this.show) : this.ancorOnClickHandler}
+        onChange={event => onChange({ ...event }, this.show)}
         style={{ outline: 'none', position: 'relative' }}
         ref={(divref) => {
           this.eventsDiv = divref;

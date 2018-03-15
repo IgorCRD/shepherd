@@ -56,6 +56,30 @@ class ShepherdAPI {
       cache: 'default',
     }).then(resp => resp.json());
   };
+
+  search = (userId, repoName) => {
+    const searchUrl = `${this.url}/repos/search`;
+
+    return fetch(searchUrl, {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json', Accept: 'application/json' },
+      mode: 'cors',
+      cache: 'default',
+      body: JSON.stringify({ id: userId, repoName }),
+    }).then(resp => resp.json());
+  };
+
+  addRepo = (userId, repoId) => {
+    const addRepoUrl = `${this.url}/repos/addRepo`;
+
+    return fetch(addRepoUrl, {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json', Accept: 'application/json' },
+      mode: 'cors',
+      cache: 'default',
+      body: JSON.stringify({ userId, repoId }),
+    });
+  };
 }
 
 export default new ShepherdAPI();

@@ -7,6 +7,7 @@ import CommitsContainer from 'containers/commits-container';
 import SidebarContainer from 'containers/sidebar-container';
 import Flex from 'styled-flex-component';
 import styled from 'styled-components';
+import RepoInputContainer from 'containers/repo-input-container';
 
 const possibleRoutes = ['/app', '/app/main', '/authentication'];
 
@@ -20,7 +21,17 @@ const App = () => (
     <Route path="/" render={() => <NavbarContainer />} />
     <Flex justifyCenter>
       <Route path="/app" render={() => <SidebarContainer />} />
-      <Route path="/app/main" render={() => <CommitsContainer />} />
+      <Flex column style={{ 'max-width': '50%', 'min-width': '50%' }}>
+        <Route
+          path="/app/main"
+          render={() => (
+            <React.Fragment>
+              <RepoInputContainer />
+              <CommitsContainer />
+            </React.Fragment>
+          )}
+        />
+      </Flex>
     </Flex>
     <Route exact path="/" render={() => <WelcomePage />} />
     <Route exact path="/authentication" render={() => <AuthenticationContainer />} />
